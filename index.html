@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+
+
+    <title>Loadsheet Generator</title>
+</head>
+
+<body>
+
+    <header>Loadsheet, made simple.</header>
+
+    <main>
+        <nav>
+            <button class="tablink" onclick="openPage('paginaDow', this, '#36393F')" id="defaultOpen">DOW &amp;
+                DOI <i class="fas fa-balance-scale"></i></button>
+            <button id="paxMenu" class="tablink" onclick="openPage('paginaPax', this, '#36393F')"> Pax &amp; Bags <i class="fas fa-user-astronaut"></i></button>
+            <button id="fuelMenu" class="tablink" onclick="openPage('paginaFuel', this, '#36393F')">Fuel <i class="fas fa-gas-pump"></i></button>
+            <button id="maxMenu" class="tablink" onclick="openPage('paginaMax', this, '#36393F')">limits <i class="fas fa-plane-departure"></i></button>
+            <button id="deadloadMenu" class="tablink" onclick="openPage('paginaDeadload', this, '#36393F')">Deadload <i class="fas fa-truck-loading"></i></button>
+        </nav>
+
+        <div id="paginaDow" class="tabcontent"> <!-- ! DOW -->
+            <form id="dow">
+                <div class="wrapper">
+                    <div class="divTable">
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell"></div>
+                                <div class="divTableCell">weight</div>
+                                <div class="divTableCell">index</div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell" id="be">basic empty *</div>
+                                <div class="divTableCell"><input type="text" id="bew" name="bew" placeholder="142000" maxlength="6" class="nono req"></div>
+                                <div class="divTableCell"><input type="text" id="bei" name="bei" placeholder="45,0" maxlength="6" class="mipe req"></div>
+                            </div> 
+                            <div class="divTableRow">
+                                <div class="divTableCell fadeDow">a/c reg <span class="optDow">*</span></div>
+                                <div class="divTableCell"><input type="text" id="acregw" name="acregw" placeholder="2842" maxlength="6" class="togDow monly req"></div>
+                                <div class="divTableCell"><input type="text" id="acregi" name="acregi" placeholder="-1,14" maxlength="6" class="togDow mipe req"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell fadeDow">cockpit crew <span class="optDow">*</span></div>
+                                <div class="divTableCell"><input type="text" id="cockpitw" name="cockpitw" placeholder="340" maxlength="6" class="nono togDow req"></div>
+                                <div class="divTableCell"><input type="text" id="cockpiti" name="cockpiti" placeholder="-0,71" maxlength="6" class="mipe togDow req"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell fadeDow">cabin crew</div>
+                                <div class="divTableCell"><input type="text" id="cabinw" name="cabinw" placeholder="825" maxlength="6" class="nono togDow"></div>
+                                <div class="divTableCell"><input type="text" id="cabini" name="cabini" placeholder="-0,14" maxlength="6" class="mipe togDow"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell fadeDow">pantry code</div>
+                                <div class="divTableCell"><input type="text" id="pantryw" name="pantryw" placeholder="4635" maxlength="6" class="nono togDow"></div>
+                                <div class="divTableCell"><input type="text" id="pantryi" name="pantryi" placeholder="0,66" maxlength="6" class="mipe togDow"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell fadeDow">correction <span class="caption fadeDow">(if any)</span></div>
+                                <div class="divTableCell"><input type="text" id="correctionw" name="correctionw" placeholder="309" maxlength="6" class="monly togDow"></div>
+                                <div class="divTableCell"><input type="text" id="correctioni" name="correctioni" placeholder="0,52" maxlength="6" class="mipe togDow"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell spaced"><span class="caption">* required field</span></div>
+                                <div class="divTableCell"><p>Start from DOW<span class="optDow">?</span> </p></div>
+                                <div class="divTableCell"><p><input type="checkbox" id="startFromDow"></p></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <p id="dowError" class="errorMsg"></p>
+
+                    <button id="dowReset" class="clear" type="button">Reset</button>
+                    <button id="dowSubmit" class="submit" type="button">Save</button>
+
+                </div>
+            </form>
+        </div>
+        <div id="paginaPax" class="tabcontent"> <!-- ! PAX -->
+            <form id="pax" name="formPax">
+                <div class="wrapper">
+                    <div class="divTable">
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell fadePax">class <span class="optPax"><span class="caption">(no inf)</span> *</span></div>
+                                <div class="divTableCell"><input id="paxJ" name="paxJ" type="text" placeholder="j/class" maxlength="3" class="nono reqPax togPax"></div>
+                                <div class="divTableCell"><input id="paxC" name="paxC" type="text" placeholder="c/class" maxlength="3" class="nono reqPax togPax"></div>
+                                <div class="divTableCell"><input id="paxY" name="paxY" type="text" placeholder="y/class" maxlength="3" class="nono reqPax togPax"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell fadePax">type <span class="optPax">*</span></div>
+                                <div class="divTableCell"><input id="paxAdult" name="paxAdult" type="text" placeholder="adult" maxlength="3" class="nono reqPax togPax"></div>
+                                <div class="divTableCell"><input id="paxChild" name="paxChild" type="text" placeholder="child" maxlength="3" class="nono reqPax togPax"></div>
+                                <div class="divTableCell"><input id="paxInf" name="paxInf" type="text" placeholder="infant" maxlength="3" class="nono reqPax togPax"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell fadePax">baggage <span class="optPax">*</span></div>
+                                <div class="divTableCell"><input id="bagsPcs" name="bagsPcs" type="text" placeholder="pieces" maxlength="3" class="nono reqPax togPax"></div>
+                                <div class="divTableCell"><input id="bagsWeight" name="bagsWeight" type="text" placeholder="weight" maxlength="5" class="nono reqPax togPax"></div>
+                                <div class="divTableCell"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell spaced"><span class="caption">* required field</span></div>
+                                <div class="divTableCell"><p>Nil Pax<span class="optPax">?</span> </p></div>
+                                <div class="divTableCell"><p><input type="checkbox" id="nilPax"></p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="paxError" class="errorMsg"></p>
+
+                    <button id="paxReset" type="button" class="clear">Reset</button>
+                    <button id="paxSubmit" type="button" class="submit">Save</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="paginaFuel" class="tabcontent">
+            <!-- * FUEL -->
+            <form id="fuel">
+                <div class="wrapper">
+                    <div class="divTable">
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell">block fuel</div>
+                                <div class="divTableCell"><input id="block" type="text" placeholder="115200" maxlength="6" class="nono"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">trip fuel</div>
+                                <div class="divTableCell"><input id="trip" type="text" placeholder="105700" maxlength="6" class="nono"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">taxi fuel</div>
+                                <div class="divTableCell"><input id="taxi" type="text" placeholder="1000" maxlength="4" class="nono"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p id="fuelError" class="errorMsg"></p>
+
+                    <button id="fuelReset" type="button" class="clear">Reset</button>
+                    <button id="fuelSubmit" type="button" class="submit">Save</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="paginaMax" class="tabcontent">
+            <!-- * MAX  -->
+            <form id="max">
+                <div class="wrapper">
+                    <div class="divTable">
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell">mzfw</div>
+                                <div class="divTableCell"><input id="mzfw" placeholder="197312" type="text" class="nono"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">mtow</div>
+                                <div class="divTableCell"><input id="mtow" placeholder="296195" type="text" class="nono"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">mlaw</div>
+                                <div class="divTableCell"><input id="mlaw" placeholder="213188" type="text" class="nono"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                <p id="maxError" class="errorMsg"></p>
+
+                <button id="maxReset" type="button" class="clear">Reset</button>
+                <button id="maxSubmit" type="button" class="submit">Save</button>
+                
+                </div>
+            </form>
+        </div>
+
+
+        <div id="paginaDeadload" class="tabcontent">
+            <!-- * DEADLOAD -->
+            <form id="deadload">
+                <div class="wrapper">
+                    <div class="divTable">
+                        <div class="divTableBody">
+                            <div class="divTableRow">
+                                <div class="divTableCell"></div>
+                                <div class="divTableCell">total</div>
+                                <div class="divTableCell">cpt 1</div>
+                                <div class="divTableCell">cpt 2</div>
+                                <div class="divTableCell">cpt 3</div>
+                                <div class="divTableCell">cpt 4</div>
+                                <div class="divTableCell">cpt 5</div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell fadePax">bags</div>
+                                <div class="divTableCell"><input id="bagsTotal" type="text" maxlength="5" class="nono togPax"></div>
+                                <div class="divTableCell"><input id="bags1" type="text" maxlength="5" class="nono togPax"></div>
+                                <div class="divTableCell"><input id="bags2" type="text" maxlength="5" class="nono togPax"></div>
+                                <div class="divTableCell"><input id="bags3" type="text" maxlength="5" class="nono togPax"></div>
+                                <div class="divTableCell"><input id="bags4" type="text" maxlength="5" class="nono togPax"></div>
+                                <div class="divTableCell"><input id="bags5" type="text" maxlength="5" class="nono togPax"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">mail</div>
+                                <div class="divTableCell"><input id="mailTotal" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="mail1" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="mail2" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="mail3" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="mail4" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="mail5" type="text" maxlength="5" class="nono"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">cargo</div>
+                                <div class="divTableCell"><input id="cargoTotal" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="cargo1" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="cargo2" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="cargo3" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="cargo4" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="cargo5" type="text" maxlength="5" class="nono"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">tare</div>
+                                <div class="divTableCell"><input id="tareTotal" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="tare1" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="tare2" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="tare3" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="tare4" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="tare5" type="text" maxlength="5" class="nono"></div>
+                            </div>
+                            <div class="divTableRow">
+                                <div class="divTableCell">total</div>
+                                <div class="divTableCell"><input id="total" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="total1" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="total2" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="total3" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="total4" type="text" maxlength="5" class="nono"></div>
+                                <div class="divTableCell"><input id="total5" type="text" maxlength="5" class="nono"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="deadloadError" class="errorMsg"></p>
+
+                    <button id="deadloadReset" type="button" class="clear">Reset</button>
+                    <button id="deadloadSubmit" type="button" class="submit">Save</button>
+
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>footer
+    </footer>
+
+    <script src="assets/tab.js"></script>
+    <script type="module" src="/assets/main.js"></script>
+
+</body>
+
+</html>

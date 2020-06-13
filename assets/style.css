@@ -1,0 +1,333 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
+/* 
+ ! VARIABLES SECTION //////////////////////////////////////
+*/
+
+:root {
+  --main-bg-color: #36393F;
+  --header-bg-color: #2C2F33;
+
+  --footer-bg-color: #2C2F33;
+
+  --button-submit-color: #ffffff;
+  --button-submit-hover: #0062cc;
+  --button-reset-color: #969696;
+  --button-reset-hover: #818181;
+
+  --placeholder-color: rgb(204, 204, 204);
+
+  --tablink-color: #2E3135;
+  --tablink-hover: #3a3a3a;
+  --tabcontent-color: #ffffff;
+
+  --header-height: 5vh;
+  --main-height: 70vh;
+  --footer-height: 25vh;
+
+  --input-background-color: #ffffff;
+  --errorColor: #d83333;
+  --disabled-input-color: #575757;
+}
+
+/*
+ ! GENERAL CSS ////////////////////////////////////////////
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Raleway;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  cursor:url(./mousecraft.png), auto;
+
+}
+
+header {
+  height: var(--header-height);
+  background-color: var(--header-bg-color);
+  font-weight: 500;
+}
+
+main {
+  height: var(--main-height);
+  font-weight: 700;
+}
+
+footer {
+  height: var(--footer-height);
+  background-color: var(--footer-bg-color);
+  text-align: center;
+}
+
+.control {
+  cursor: pointer;
+  margin: 10px;
+  padding: 5px;
+}
+
+.tablink {
+  background-color: var(--tablink-color);
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  /* cursor: pointer; */
+  padding: 10px 10px;
+  font-size: 18px;
+  width: 20%;
+}
+
+.tablink:hover {
+  background-color: var(--main-bg-color);
+  font-weight: bolder;
+  border-bottom: 2px solid white;
+}
+
+.tablinkOk {
+  border-bottom: 2px solid green;
+}
+
+.tablinkOk:hover {
+  border-bottom: 2px solid green;
+}
+
+.tabcontent {
+  color: var(--tabcontent-color);
+  display: none;
+  padding: 50px 10px 0px 10px;
+  height: inherit;
+  border: 2px solid black;
+  font-weight: bolder;
+
+}
+
+#paginaDow {
+  background-color: var(--main-bg-color);
+}
+#paginaPax {
+  background-color: var(--main-bg-color);
+}
+#paginaFuel {
+  background-color: var(--main-bg-color);
+}
+#paginaMax {
+  background-color: var(--main-bg-color);
+}
+#paginaDeadload {
+  background-color: var(--main-bg-color);
+}
+
+/*
+ ! TABLE STYLING //////////////////////////////////////////
+*/
+
+.divTable {
+  display: table;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  /* background-color: green; "!!!!! */
+  /* border: 1px solid white; */
+}
+.divTableRow {
+  display: table-row;
+}
+
+.divTableHeading {
+  display: table-header-group;
+}
+.divTableCell, .divTableHead {
+  display: table-cell;
+  padding: 5px;
+  text-align: left;
+  width: 10rem;
+}
+.divTableHeading {
+  display: table-header-group;
+  font-weight: bold;
+}
+.divTableFoot {
+  display: table-footer-group;
+  font-weight: bold;
+}
+.divTableBody {
+  display: table-row-group;
+}
+
+.wrapper {
+  text-align: center;
+  display: inline-block;
+}
+
+.spaced {
+  padding-top: 1.3em;
+}
+
+/* 
+ ! FORM STYLING ///////////////////////////////////////////
+*/
+
+/* 
+ * INPUT //////////////////////////////////////////////////
+*/
+
+input[type="text"] {
+  color: #000;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  border: 3px solid transparent;
+  height: 40px;
+  font-size: 1.4rem;
+  background-color: var(--input-background-color);
+  font-weight: bold;
+}
+
+input[type="text"]:disabled {
+  background: var(--disabled-input-color);
+}
+
+input[type="text"]:focus {
+  outline: none;
+  background-color: antiquewhite;
+  border-color: 30px solid blue;
+}
+
+input[type="text"].inputError {
+  background-color: var(--errorColor);
+  color: var(--input-background-color);
+}
+
+input[type="text"]:disabled {
+  background-color: grey;
+  color: var(--input-background-color);
+}
+
+input::placeholder {
+  opacity: 1;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+}
+
+input:disabled::placeholder {
+  opacity: 0.2;
+}
+
+
+label:focus + input::placeholder {
+  opacity: 0;
+}
+
+/* 
+ * CHECKBOXES /////////////////////////////////////////////
+*/
+
+input[type="checkbox"] {
+  height: 1.3em;
+  width:  1.3em;
+  cursor: pointer;
+}
+
+/* 
+ * BUTTONS ////////////////////////////////////////////////
+*/
+
+button.clear,
+button.submit {
+  width: 100%;
+  display: block;
+  margin: 0.6rem 0 1rem 0;
+  padding: 1.2em;
+  border: none;
+  border-radius: 3px;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  outline: none;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+
+button.submit {
+  background-color: var(--button-submit-color);
+}
+
+button.clear {
+  background-color: var(--main-bg-color);
+  border: 2px solid white;
+  color: white;
+}
+
+button.clear:hover {
+  background-color: white;
+  color: black;
+}
+
+::placeholder {
+  color: var(--placeholder-color);
+  font-weight: normal;
+  font-size: 18px;
+}
+
+
+.caption {
+  font-size: 12px;
+  color: lightgrey;
+  text-transform: none;
+  font-style: oblique;
+}
+
+.opt {
+  visibility: visible;
+}
+
+.errorMsg {
+  color: var(--errorColor);
+  font-style: oblique;
+  text-transform: none;
+  visibility: hidden;
+  height: 2em;
+}
+
+#paxError {
+  visibility: hidden;
+  height: 2em;
+}
+
+.fas {
+  padding: 0 0.2em;
+  color: inherit;
+}
+/*
+ ! MEDIA QUERY ////////////////////////////////////////////
+*/
+
+@media screen and (max-width: 768px) {
+  .tablink {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .tablink:hover {
+    background-color: "";
+    font-weight: bolder;
+    border-bottom: none;
+    border-right: 5px solid white;
+  }
+  
+  .tablinkOk {
+    border-bottom: none;
+    border-right: 5px solid green;
+  }
+  
+  .tablinkOk:hover {
+    border-right: 5px solid green;
+  }
+
+}
