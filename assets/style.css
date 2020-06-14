@@ -23,7 +23,8 @@
 
   --header-height: 5vh;
   --main-height: 70vh;
-  --footer-height: 25vh;
+  --console-height: 20vh;
+  --footer-height: 5vh;
 
   --input-background-color: #ffffff;
   --errorColor: #d83333;
@@ -306,6 +307,25 @@ button.clear:hover {
   padding: 0 0.2em;
   color: inherit;
 }
+
+section {
+  height: var(--console-height);
+  background-color: antiquewhite;
+  color: var(--footer-bg-color);
+  font-style: oblique;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  ! MEDIA QUERY ////////////////////////////////////////////
 */
