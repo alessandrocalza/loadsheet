@@ -425,10 +425,24 @@ function greenBorder() {
 
 
 window.addEventListener("load", toggle);
-
 function toggle(){
   let myBlink = document.querySelector("span#blink");
   (myBlink.style.visibility === "visible" ? myBlink.style.visibility = "hidden" : myBlink.style.visibility = "visible");
 }
 
-setInterval(toggle, 600);
+
+do {
+  setInterval(toggle, 600);
+}
+while ((ls.dowStatusOk === false) || (ls.paxStatusOk === false) || 
+  (ls.fuelStatusOk === false) ||  (ls.maxStatusOk === false) || 
+  (ls.deadloadStatusOk === false));
+
+if(ls.dowStatusOk === true) {
+  // let dowInfo = document.querySelector("#dowInfo");
+  // dowInfo.innerHTML = `${ls.dow} <br> ${ls.doi}`;
+  console.log("gfgfgf");
+}
+else {
+  document.querySelector("#dowInfo").innerHTML = "";
+}

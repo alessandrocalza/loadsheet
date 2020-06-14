@@ -23,7 +23,9 @@
 
   --header-height: 5vh;
   --main-height: 70vh;
-  --console-height: 20vh;
+  --som-height: 1vh;
+  --infos-height: 19vh;
+
   --footer-height: 5vh;
 
   --input-background-color: #ffffff;
@@ -59,7 +61,6 @@ main {
 
 section {
   display: block;
-  height: var(--console-height);
   background-color: antiquewhite;
   color: var(--footer-bg-color);
   font-style: oblique;
@@ -67,10 +68,8 @@ section {
 
 
 .som {
-  display: block;
-  height: 1.5em;
+  height: var(--som-height);
   text-align: left;
-  float: left;
   padding: 0.5em;
   color: var(--footer-bg-color);
 }
@@ -83,12 +82,23 @@ section {
 
 #demo {
   color: var(--footer-bg-color);
+  float: left;
+  font-weight: bolder;
 }
 
 .infos {
+  height: var(--infos-height);
   display: flex;
+  flex-direction: row;
 }
 
+#dowInfo, #paxInfo, #fuelInfo, #maxInfo, #deadloadInfo {
+  flex: 20%;
+  color: var(--footer-bg-color);
+  font-size: 16px;
+  font-weight: bolder;
+  border: 1px solid black;
+}
 
 
 
@@ -98,6 +108,8 @@ footer {
   text-align: center;
   font-weight: 500;
   text-transform: none;
+  padding: 0.5em;
+  font-size: 14px;
 
 }
 
