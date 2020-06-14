@@ -57,6 +57,41 @@ main {
   font-weight: 700;
 }
 
+section {
+  display: block;
+  height: var(--console-height);
+  background-color: antiquewhite;
+  color: var(--footer-bg-color);
+  font-style: oblique;
+}
+
+
+.som {
+  display: block;
+  height: 1.5em;
+  text-align: left;
+  float: left;
+  padding: 0.5em;
+  color: var(--footer-bg-color);
+}
+
+
+#blink {
+  visibility: visible;
+  color: var(--footer-bg-color);
+}
+
+#demo {
+  color: var(--footer-bg-color);
+}
+
+.infos {
+  display: flex;
+}
+
+
+
+
 footer {
   height: var(--footer-height);
   background-color: var(--footer-bg-color);
@@ -309,12 +344,6 @@ button.clear:hover {
   color: inherit;
 }
 
-section {
-  height: var(--console-height);
-  background-color: antiquewhite;
-  color: var(--footer-bg-color);
-  font-style: oblique;
-}
 
 
 

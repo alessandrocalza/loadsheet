@@ -422,3 +422,13 @@ function greenBorder() {
     document.querySelector("#deadloadMenu").classList.remove("tablinkOk");
   }
 }
+
+
+window.addEventListener("load", toggle);
+
+function toggle(){
+  let myBlink = document.querySelector("span#blink");
+  (myBlink.style.visibility === "visible" ? myBlink.style.visibility = "hidden" : myBlink.style.visibility = "visible");
+}
+
+setInterval(toggle, 600);
