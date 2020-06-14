@@ -18,12 +18,16 @@ checkBoxDow.addEventListener("click", function () {
     dow.startFromDow();
     console.log("Starting straight from DOW..");
     ls.dowStatusOk = false;
+    recapDow();
+
     console.log("Dow status ok: ", ls.dowStatusOk);
   } else {
     dow.startFromBasic();
+    dow.clearDowValues();
     console.log("DOW build up..");
     ls.dowStatusOk = false;
     console.log("Dow status ok: ", ls.dowStatusOk);
+    recapDow();
   }
 });
 
@@ -44,6 +48,7 @@ function clearForm(formId) {
     console.log("Dow form cleared..");
     ls.dowStatusOk = false;
     console.log("Dow status ok: ", ls.dowStatusOk);
+    recapDow();
   }
 
   if (formId === "pax") {
@@ -51,24 +56,28 @@ function clearForm(formId) {
     console.log("Pax form cleared..");
     ls.paxStatusOk = false;
     console.log("Pax status ok: ", ls.paxStatusOk);
+    recapPax();
   }
 
   if (formId === "fuel") {
     console.log("Fuel form cleared..");
     ls.fuelStatusOk = false;
     console.log("Fuel status ok: ", ls.fuelStatusOk);
+    recapFuel();
   }
 
   if (formId === "max") {
     console.log("Max form cleared..");
     ls.maxStatusOk = false;
     console.log("Max status ok: ", ls.maxStatusOk);
+    recapMax();
   }
 
   if (formId === "deadload") {
     console.log("Deadload form cleared: ");
     ls.deadloadStatusOk = false;
     console.log("Deadload status ok: ", ls.deadloadStatusOk);
+    recapDeadload();
   }
 
   const allErrors = document.querySelectorAll("form#" + `${formId}` + " input[type='text'].inputError");
@@ -114,8 +123,8 @@ document.querySelectorAll("input[type='text']").forEach((item) => {
 
 dowSubmit.addEventListener("click", function (e) {
   var checkBoxDow = document.querySelector("#startFromDow");
-
   ls.dowStatusOk = false;
+
   if (checkBoxDow.checked == false) {
     const entriesReq = document.querySelectorAll("form#dow input[type='text'].req");
     const entriesNotReq = document.querySelectorAll("form#dow input[type='text']:not(.req)");
@@ -126,7 +135,7 @@ dowSubmit.addEventListener("click", function (e) {
 
     // For required fields (basic empty, a/c reg and cockpit), input must be a valid number (0 is not allowed)
     for (let i of entriesReq) {
-      if (fn.inputIsValid(i.value) === false || i.value === 0) {
+      if (fn.inputIsValid(i.value) === false || i.value === 0 || i.value === "0") {
         errorsReq++;
         console.log("required field error");
       }
@@ -141,6 +150,7 @@ dowSubmit.addEventListener("click", function (e) {
     // If no errors have occurred, values can be stored in ls object
     if (errorsReq === 0 && errorsNotReq === 0) {
       console.log("No errors found..");
+
       ls.bew = fn.prep(document.querySelector("#bew").value);
       ls.bei = fn.prep(document.querySelector("#bei").value);
       ls.acregw = fn.prep(document.querySelector("#acregw").value);
@@ -162,14 +172,21 @@ dowSubmit.addEventListener("click", function (e) {
       console.log("DOW: ", ls.dow);
       console.log("DOI: ", ls.doi);
       console.log("Dow status ok: ", ls.dowStatusOk);
+      recapDow();
     } else {
       fn.showError("dow");
       console.log("dow validation failure");
       ls.dowStatusOk = false;
+      recapDow();
       console.log("Dow status ok: ", ls.dowStatusOk);
     }
   } else {
-    if (fn.inputIsValid(document.querySelector("#bew").value) === true && fn.inputIsValid(document.querySelector("#bei").value) === true) {
+    if (
+      fn.inputIsValid(document.querySelector("#bew").value) === true &&
+      fn.inputIsValid(document.querySelector("#bei").value) === true &&
+      document.querySelector("#bei").value !== "0" &&
+      document.querySelector("#bei").value !== "0"
+    ) {
       ls.dow = fn.prep(document.querySelector("#bew").value);
       ls.doi = fn.prep(document.querySelector("#bei").value);
       ls.dowStatusOk = true;
@@ -177,11 +194,13 @@ dowSubmit.addEventListener("click", function (e) {
       console.log("DOW: ", ls.dow);
       console.log("DOI: ", ls.doi);
       console.log("Dow status ok: ", ls.dowStatusOk);
+      recapDow();
     } else {
       fn.showError("dow");
       console.log("dow validation failure");
       ls.dowStatusOk = false;
       console.log("Dow status ok: ", ls.dowStatusOk);
+      recapDow();
     }
   }
 });
@@ -193,11 +212,14 @@ checkBoxPax.addEventListener("click", function () {
   if (checkBoxPax.checked === true) {
     pax.nilPax();
     ls.paxStatusOk === false;
+    recapPax();
     clearForm("deadload");
     console.log("nil pax selected");
     fn.hideError("pax");
   } else {
     ls.paxStatusOk === false;
+    recapPax();
+    clearForm("pax");
     clearForm("deadload");
     pax.yesPax();
     console.log("there are some pax");
@@ -223,11 +245,13 @@ document.querySelector("#paxSubmit").addEventListener("click", function () {
     ls.bagsWeight = 0;
     console.log("nil pax, OK");
     ls.paxStatusOk = true;
+    recapPax();
     console.log("Pax status ok: ", ls.paxStatusOk);
   }
   //* THERE ARE PAX
   else {
     ls.paxStatusOk = false;
+    recapPax();
     ls.paxAdult = fn.prep(document.querySelector("#paxAdult").value);
     ls.paxChild = fn.prep(document.querySelector("#paxChild").value);
     ls.paxInf = fn.prep(document.querySelector("#paxInf").value);
@@ -238,7 +262,7 @@ document.querySelector("#paxSubmit").addEventListener("click", function () {
     ls.ttlType = ls.paxAdult + ls.paxChild + ls.paxInf;
     ls.ttlClass = ls.paxJ + ls.paxC + ls.paxY;
     ls.paxWeight = ls.paxAdult * 84 + ls.paxChild * 35;
-    //  BAGS FIGURES
+
     ls.bagsPcs = fn.prep(document.querySelector("#bagsPcs").value);
     ls.bagsWeight = fn.prep(document.querySelector("#bagsWeight").value);
     ls.bagsAvg = fn.prep(parseFloat(ls.bagsWeight / ls.bagsPcs).toFixed(2));
@@ -252,13 +276,17 @@ document.querySelector("#paxSubmit").addEventListener("click", function () {
       ((ls.bagsPcs === 0 && ls.bagsWeight === 0) || (ls.bagsPcs > 0 && ls.bagsPcs < ls.bagsWeight))
     ) {
       ls.paxStatusOk = true;
+      recapPax();
+      if (ls.deadloadStatusOk === true && ls.bagsWeight !== ls.bagsTotal) {
+        clearForm("deadload");
+      }
       console.log("Pax status ok: ", ls.paxStatusOk);
       console.log("pax figures ok");
-      console.log(`TTL Pax: ${ls.paxAdult + ls.paxChild} + ${ls.paxInf} inf`);
-      console.log(`Total bags: ${ls.bagsPcs} @ ${ls.bagsWeight} kg, Bag Average: ${ls.bagsAvg} kg`);
+
       fn.hideError("pax");
     } else {
       ls.paxStatusOk = false;
+      recapPax();
       fn.showError("pax");
       console.log("pax mismatch");
       console.log("Pax status ok: ", ls.paxStatusOk);
@@ -277,11 +305,13 @@ document.querySelector("#fuelSubmit").addEventListener("click", function () {
 
   if (ls.block !== 0 && ls.trip !== 0 && ls.taxi !== 0 && ls.taxi < ls.trip && ls.trip < ls.block) {
     ls.fuelStatusOk = true;
+    recapFuel();
     fn.hideError("fuel");
     console.log("Fuel status ok: ", ls.fuelStatusOk);
     console.log(`BLOCK: ${ls.block}, TRIP: ${ls.trip}, TAXI: ${ls.taxi}`);
   } else {
     ls.fuelStatusOk = false;
+    recapFuel();
     fn.showError("fuel");
     console.log("Fuel status ok: ", ls.fuelStatusOk);
   }
@@ -298,11 +328,13 @@ document.querySelector("#maxSubmit").addEventListener("click", function () {
 
   if (ls.mzfw !== 0 && ls.mtow !== 0 && ls.mlaw !== 0 && ls.mtow > ls.mlaw && ls.mlaw > ls.mzfw) {
     ls.maxStatusOk = true;
+    recapMax();
     fn.hideError("max");
     console.log("Max status ok: ", ls.maxStatusOk);
     console.log(`MZFW: ${ls.mzfw}, MTOW: ${ls.mtow}, MLAW: ${ls.mlaw}`);
   } else {
     ls.maxStatusOk = false;
+    recapMax();
     fn.showError("max");
     console.log("Max status ok: ", ls.maxStatusOk);
   }
@@ -313,74 +345,78 @@ document.querySelector("#maxSubmit").addEventListener("click", function () {
 */
 
 document.querySelector("#deadloadSubmit").addEventListener("click", function () {
-  // Bags row
-  ls.bags1 = fn.prep(document.querySelector("#bags1").value);
-  ls.bags2 = fn.prep(document.querySelector("#bags2").value);
-  ls.bags3 = fn.prep(document.querySelector("#bags3").value);
-  ls.bags4 = fn.prep(document.querySelector("#bags4").value);
-  ls.bags5 = fn.prep(document.querySelector("#bags5").value);
-  ls.bagsTotal = fn.prep(document.querySelector("#bagsTotal").value);
+    // Bags row
+    ls.bags1 = fn.prep(document.querySelector("#bags1").value);
+    ls.bags2 = fn.prep(document.querySelector("#bags2").value);
+    ls.bags3 = fn.prep(document.querySelector("#bags3").value);
+    ls.bags4 = fn.prep(document.querySelector("#bags4").value);
+    ls.bags5 = fn.prep(document.querySelector("#bags5").value);
+    ls.bagsTotal = fn.prep(document.querySelector("#bagsTotal").value);
 
-  // Mail row
-  ls.mail1 = fn.prep(document.querySelector("#mail1").value);
-  ls.mail2 = fn.prep(document.querySelector("#mail2").value);
-  ls.mail3 = fn.prep(document.querySelector("#mail3").value);
-  ls.mail4 = fn.prep(document.querySelector("#mail4").value);
-  ls.mail5 = fn.prep(document.querySelector("#mail5").value);
-  ls.mailTotal = fn.prep(document.querySelector("#mailTotal").value);
+    // Mail row
+    ls.mail1 = fn.prep(document.querySelector("#mail1").value);
+    ls.mail2 = fn.prep(document.querySelector("#mail2").value);
+    ls.mail3 = fn.prep(document.querySelector("#mail3").value);
+    ls.mail4 = fn.prep(document.querySelector("#mail4").value);
+    ls.mail5 = fn.prep(document.querySelector("#mail5").value);
+    ls.mailTotal = fn.prep(document.querySelector("#mailTotal").value);
 
-  // Cargo row
-  ls.cargo1 = fn.prep(document.querySelector("#cargo1").value);
-  ls.cargo2 = fn.prep(document.querySelector("#cargo2").value);
-  ls.cargo3 = fn.prep(document.querySelector("#cargo3").value);
-  ls.cargo4 = fn.prep(document.querySelector("#cargo4").value);
-  ls.cargo5 = fn.prep(document.querySelector("#cargo5").value);
-  ls.cargoTotal = fn.prep(document.querySelector("#cargoTotal").value);
+    // Cargo row
+    ls.cargo1 = fn.prep(document.querySelector("#cargo1").value);
+    ls.cargo2 = fn.prep(document.querySelector("#cargo2").value);
+    ls.cargo3 = fn.prep(document.querySelector("#cargo3").value);
+    ls.cargo4 = fn.prep(document.querySelector("#cargo4").value);
+    ls.cargo5 = fn.prep(document.querySelector("#cargo5").value);
+    ls.cargoTotal = fn.prep(document.querySelector("#cargoTotal").value);
 
-  // Tare row
-  ls.tare1 = fn.prep(document.querySelector("#tare1").value);
-  ls.tare2 = fn.prep(document.querySelector("#tare2").value);
-  ls.tare3 = fn.prep(document.querySelector("#tare3").value);
-  ls.tare4 = fn.prep(document.querySelector("#tare4").value);
-  ls.tare5 = fn.prep(document.querySelector("#tare5").value);
-  ls.tareTotal = fn.prep(document.querySelector("#tareTotal").value);
+    // Tare row
+    ls.tare1 = fn.prep(document.querySelector("#tare1").value);
+    ls.tare2 = fn.prep(document.querySelector("#tare2").value);
+    ls.tare3 = fn.prep(document.querySelector("#tare3").value);
+    ls.tare4 = fn.prep(document.querySelector("#tare4").value);
+    ls.tare5 = fn.prep(document.querySelector("#tare5").value);
+    ls.tareTotal = fn.prep(document.querySelector("#tareTotal").value);
 
-  // TOTAL row
-  ls.total1 = fn.prep(document.querySelector("#total1").value);
-  ls.total2 = fn.prep(document.querySelector("#total2").value);
-  ls.total3 = fn.prep(document.querySelector("#total3").value);
-  ls.total4 = fn.prep(document.querySelector("#total4").value);
-  ls.total5 = fn.prep(document.querySelector("#total5").value);
-  ls.total = fn.prep(document.querySelector("#total").value);
+    // TOTAL row
+    ls.total1 = fn.prep(document.querySelector("#total1").value);
+    ls.total2 = fn.prep(document.querySelector("#total2").value);
+    ls.total3 = fn.prep(document.querySelector("#total3").value);
+    ls.total4 = fn.prep(document.querySelector("#total4").value);
+    ls.total5 = fn.prep(document.querySelector("#total5").value);
+    ls.total = fn.prep(document.querySelector("#total").value);
 
-  if (
-    (ls.bagsTotal === ls.bags1 + ls.bags2 + ls.bags3 + ls.bags4 + ls.bags5) &&
-    (ls.mailTotal === ls.mail1 + ls.mail2 + ls.mail3 + ls.mail4 + ls.mail5) &&
-    (ls.cargoTotal === ls.cargo1 + ls.cargo2 + ls.cargo3 + ls.cargo4 + ls.cargo5) &&
-    (ls.tareTotal === ls.tare1 + ls.tare2 + ls.tare3 + ls.tare4 + ls.tare5) &&
-    (ls.total === ls.bagsTotal + ls.mailTotal + ls.cargoTotal + ls.tareTotal) &&
-    (ls.total1 === ls.bags1 + ls.mail1 + ls.cargo1 + ls.tare1) &&
-    (ls.total2 === ls.bags2 + ls.mail2 + ls.cargo2 + ls.tare2) &&
-    (ls.total3 === ls.bags3 + ls.mail3 + ls.cargo3 + ls.tare3) &&
-    (ls.total4 === ls.bags4 + ls.mail4 + ls.cargo4 + ls.tare4) &&
-    (ls.total5 === ls.bags5 + ls.mail5 + ls.cargo5 + ls.tare5)
-  ) {
-    ls.deadloadStatusOk = true;
-    console.log("Deadload status ok: ", ls.deadloadStatusOk);
-    fn.hideError("deadload");
+    if (
+      ls.bagsTotal === ls.bags1 + ls.bags2 + ls.bags3 + ls.bags4 + ls.bags5 &&
+      ls.mailTotal === ls.mail1 + ls.mail2 + ls.mail3 + ls.mail4 + ls.mail5 &&
+      ls.cargoTotal === ls.cargo1 + ls.cargo2 + ls.cargo3 + ls.cargo4 + ls.cargo5 &&
+      ls.tareTotal === ls.tare1 + ls.tare2 + ls.tare3 + ls.tare4 + ls.tare5 &&
+      ls.total === ls.bagsTotal + ls.mailTotal + ls.cargoTotal + ls.tareTotal &&
+      ls.total1 === ls.bags1 + ls.mail1 + ls.cargo1 + ls.tare1 &&
+      ls.total2 === ls.bags2 + ls.mail2 + ls.cargo2 + ls.tare2 &&
+      ls.total3 === ls.bags3 + ls.mail3 + ls.cargo3 + ls.tare3 &&
+      ls.total4 === ls.bags4 + ls.mail4 + ls.cargo4 + ls.tare4 &&
+      ls.total5 === ls.bags5 + ls.mail5 + ls.cargo5 + ls.tare5
+    ) {
+      ls.deadloadStatusOk = true;
+      if (ls.paxStatusOk === true && ls.bagsWeight !== ls.bagsTotal) {
+        clearForm("pax");
+      }
+      recapDeadload();
+      console.log("Deadload status ok: ", ls.deadloadStatusOk);
+      fn.hideError("deadload");
 
-    console.log(`Total bags weight: ${ls.bagsTotal}`);
-    console.log(`Total mail weight: ${ls.mailTotal}`);
-    console.log(`Total cargo weight: ${ls.cargoTotal}`);
-    console.log(`Total tare weight: ${ls.tareTotal}`);
-    console.log(`Total weight: ${ls.total}`);
-
-
-  } else {
-    ls.deadloadStatusOk = false;
-    console.log("Deadload status ok: ", ls.deadloadStatusOk);
-    fn.showError("deadload");
-  }
+      console.log(`Total bags weight: ${ls.bagsTotal}`);
+      console.log(`Total mail weight: ${ls.mailTotal}`);
+      console.log(`Total cargo weight: ${ls.cargoTotal}`);
+      console.log(`Total tare weight: ${ls.tareTotal}`);
+      console.log(`Total weight: ${ls.total}`);
+    } else {
+      ls.deadloadStatusOk = false;
+      recapDeadload();
+      console.log("Deadload status ok: ", ls.deadloadStatusOk);
+      fn.showError("deadload");
+    }
+  
 });
 
 
@@ -388,17 +424,16 @@ document.querySelector("#deadloadSubmit").addEventListener("click", function () 
 
 function greenBorder() {
   // Dow check
-  if (ls.dowStatusOk === true) { 
+  if (ls.dowStatusOk === true) {
     document.querySelector("#defaultOpen").classList.add("tablinkOk");
-  } 
-  else { 
+  } else {
     document.querySelector("#defaultOpen").classList.remove("tablinkOk");
   }
 
   // Pax check
   if (ls.paxStatusOk === true) {
-    document.querySelector("#paxMenu").classList.add("tablinkOk");} 
-  else {
+    document.querySelector("#paxMenu").classList.add("tablinkOk");
+  } else {
     document.querySelector("#paxMenu").classList.remove("tablinkOk");
   }
 
@@ -423,26 +458,75 @@ function greenBorder() {
   }
 }
 
-
 window.addEventListener("load", toggle);
-function toggle(){
+function toggle() {
   let myBlink = document.querySelector("span#blink");
-  (myBlink.style.visibility === "visible" ? myBlink.style.visibility = "hidden" : myBlink.style.visibility = "visible");
+  myBlink.style.visibility === "visible" ? (myBlink.style.visibility = "hidden") : (myBlink.style.visibility = "visible");
 }
 
+// ! RECAP FUNCTIONS /////////////////////////////////////////////////////////////////////
 
-do {
-  setInterval(toggle, 600);
+function recapDow() {
+  var dowInfo = document.querySelector("#dowInfo");
+  if (ls.dowStatusOk === true) {
+    dowInfo.innerHTML = `DOW: ${ls.dow} <br>
+                          DOI: ${ls.doi} <br>`;
+  } else dowInfo.innerHTML = "";
 }
-while ((ls.dowStatusOk === false) || (ls.paxStatusOk === false) || 
-  (ls.fuelStatusOk === false) ||  (ls.maxStatusOk === false) || 
-  (ls.deadloadStatusOk === false));
 
-if(ls.dowStatusOk === true) {
-  // let dowInfo = document.querySelector("#dowInfo");
-  // dowInfo.innerHTML = `${ls.dow} <br> ${ls.doi}`;
-  console.log("gfgfgf");
+function recapPax() {
+  var paxInfo = document.querySelector("#paxInfo");
+
+  if (ls.paxStatusOk === true) {
+    if (checkBoxPax.checked === true) {
+      paxInfo.innerHTML = `PAX NIL <br>
+                            BAGS NIL`;
+    } else {
+      paxInfo.innerHTML = "";
+
+      if (ls.bagsPcs === 0) {
+        paxInfo.innerHTML = paxInfo.innerHTML = `TTL Pax: ${ls.paxAdult + ls.paxChild} + ${ls.paxInf} inf <br>
+                                      J${ls.paxJ} C${ls.paxC} Y${ls.paxY} <br>      
+                                      BAGS NIL`;
+      } else {
+        paxInfo.innerHTML = `TTL Pax: ${ls.paxAdult + ls.paxChild} + ${ls.paxInf} Inf <br>
+                        J${ls.paxJ} C${ls.paxC} Y${ls.paxY} <br>      
+                        Bags: ${ls.bagsPcs} @ ${ls.bagsWeight} kg <br>
+                        Bag Avg: ${ls.bagsAvg}`;
+      }
+    }
+  } else paxInfo.innerHTML = "";
 }
-else {
-  document.querySelector("#dowInfo").innerHTML = "";
+
+function recapFuel() {
+  var fuelInfo = document.querySelector("#fuelInfo");
+  if (ls.fuelStatusOk === true) {
+    fuelInfo.innerHTML = `Block: ${ls.block} <br>
+                          Trip: ${ls.trip} <br>
+                          Taxi: ${ls.taxi} <br>`;
+  } else fuelInfo.innerHTML = "";
+}
+
+function recapMax() {
+  var maxInfo = document.querySelector("#maxInfo");
+  if (ls.maxStatusOk === true) {
+    maxInfo.innerHTML = `MZFW: ${ls.mzfw} <br>
+                          MTOW: ${ls.mtow} <br>
+                          MLAW: ${ls.mlaw} <br>`;
+  } else maxInfo.innerHTML = "";
+}
+
+function recapDeadload() {
+  var deadloadInfo = document.querySelector("#deadloadInfo");
+  if (ls.deadloadStatusOk === true) {
+    if (ls.total === 0) {
+      deadloadInfo.innerHTML = "Nil Cargo";
+    } else {
+      deadloadInfo.innerHTML = `Bags: ${ls.bagsTotal} kg<br>
+                                Mail: ${ls.mailTotal} kg<br>
+                                Cargo: ${ls.cargoTotal} kg<br>
+                                Tare: ${ls.tareTotal} kg<br>
+                                TOTAL: ${ls.total} kg`;
+    }
+  } else deadloadInfo.innerHTML = "";
 }

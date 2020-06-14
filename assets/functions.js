@@ -36,3 +36,4 @@ export function hideError(formId) {
   para.innerHTML = "";
   para.style.visibility = "hidden";
 }
+

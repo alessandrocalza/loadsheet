@@ -23,8 +23,8 @@
 
   --header-height: 5vh;
   --main-height: 70vh;
-  --som-height: 1vh;
-  --infos-height: 19vh;
+  --som-height: 5vh;
+  --infos-height: 15vh;
 
   --footer-height: 5vh;
 
@@ -41,11 +41,10 @@
   margin: 0;
   padding: 0;
   font-family: Raleway;
-  text-transform: uppercase;
   text-align: center;
   color: white;
-  cursor:url(./mousecraft.png), auto;
-
+  cursor:url(./plane.png), auto;
+  text-transform: uppercase;
 }
 
 header {
@@ -57,13 +56,16 @@ header {
 main {
   height: var(--main-height);
   font-weight: 700;
+
 }
 
 section {
   display: block;
-  background-color: antiquewhite;
+  background-color: var(--header-bg-color);
   color: var(--footer-bg-color);
   font-style: oblique;
+  text-transform: capitalize;
+
 }
 
 
@@ -81,25 +83,33 @@ section {
 }
 
 #demo {
-  color: var(--footer-bg-color);
+  color: var(--error-color);
   float: left;
   font-weight: bolder;
 }
 
-.infos {
+.container {
   height: var(--infos-height);
   display: flex;
   flex-direction: row;
+  text-transform: none;
+}
+
+.recap {
+  flex: 20%;
+  color: var(--footer-bg-color);
+  /* border: 1px solid black; */
 }
 
 #dowInfo, #paxInfo, #fuelInfo, #maxInfo, #deadloadInfo {
-  flex: 20%;
-  color: var(--footer-bg-color);
-  font-size: 16px;
+  color: white;
+  display: block;
+  text-transform: none;
   font-weight: bolder;
-  border: 1px solid black;
+  font-size: 16px;
+  padding-left: 2em;
+  text-align: left;
 }
-
 
 
 footer {
