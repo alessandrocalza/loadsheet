@@ -60,6 +60,8 @@ footer {
   height: var(--footer-height);
   background-color: var(--footer-bg-color);
   text-align: center;
+  font-weight: 500;
+
 }
 
 .control {
@@ -250,7 +252,7 @@ button.submit {
   outline: none;
   line-height: 1;
   text-align: center;
-  cursor: pointer;
+  /* cursor: pointer; */
   transition-duration: 0.1s;
 }
 
