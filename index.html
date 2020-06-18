@@ -17,20 +17,14 @@
 
     <main>
         <nav>
-            <button class="tablink" onclick="openPage('paginaDow', this, '#36393F')" id="defaultOpen">DOW &amp;
-                DOI <i class="fas fa-balance-scale"></i></button>
-            <button id="paxMenu" class="tablink" onclick="openPage('paginaPax', this, '#36393F')"> Pax &amp; Bags <i
-                    class="fas fa-user-astronaut"></i></button>
-            <button id="fuelMenu" class="tablink" onclick="openPage('paginaFuel', this, '#36393F')">Fuel <i
-                    class="fas fa-gas-pump"></i></button>
-            <button id="maxMenu" class="tablink" onclick="openPage('paginaMax', this, '#36393F')">limits <i
-                    class="fas fa-plane-departure"></i></button>
-            <button id="deadloadMenu" class="tablink" onclick="openPage('paginaDeadload', this, '#36393F')">Deadload <i
-                    class="fas fa-truck-loading"></i></button>
+<button class="tablink" onclick="openPage('paginaDow', this, '#36393F')" id="defaultOpen">DOW &amp; DOI <i class="fas fa-balance-scale"></i></button>
+<button id="paxMenu" class="tablink" onclick="openPage('paginaPax', this, '#36393F')"> Pax &amp; Bags <i class="fas fa-user-astronaut" style="color: #F7347A;"></i></button>
+<button id="fuelMenu" class="tablink" onclick="openPage('paginaFuel', this, '#36393F')">Fuel <i class="fas fa-gas-pump"></i></button>
+<button id="maxMenu" class="tablink" onclick="openPage('paginaMax', this, '#36393F')">limits <i class="fas fa-plane-departure"></i></button>
+<button id="deadloadMenu" class="tablink" onclick="openPage('paginaDeadload', this, '#36393F')">Deadload <i class="fas fa-truck-loading"></i></button>
         </nav>
 
-        <div id="paginaDow" class="tabcontent">
-            <!-- ! DOW -->
+        <div id="paginaDow" class="tabcontent"><!-- ! DOW -->
             <form id="dow">
                 <div class="wrapper">
                     <div class="divTable">
@@ -326,8 +320,10 @@
     </main>
 
     <section>
+       
         <div class="som">
-            <p id="demo">&gt;<span id="blink">_</span></p>
+            <button id="generate" type="button" class="submit" >Generate <i class="fas fa-cogs"></i> </button>
+            
         </div>
         
         <div class="container">
@@ -343,7 +339,10 @@
     </section>
 
     <footer>
-        All weights in kg. For information only.
+        All weights in kg. For information only. Best viewed on desktop <button id="resetAll" type="button" class="clear" >Reset ALL</button>
+        <br>
+        Made with HTML, CSS <span style="color: #F7347A; font-weight: bolder;">&amp;</span> Javascript by a|C
+        
     </footer>
 
     <script src="./assets/tab.js"></script>

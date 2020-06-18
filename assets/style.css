@@ -22,10 +22,10 @@
   --tabcontent-color: #ffffff;
 
   --header-height: 5vh;
-  --main-height: 70vh;
-  --som-height: 5vh;
-  --infos-height: 15vh;
+  --main-height: 65vh;
 
+  --som-height: 10vh;
+  --infos-height: 15vh;
   --footer-height: 5vh;
 
   --input-background-color: #ffffff;
@@ -43,9 +43,20 @@
   font-family: Raleway;
   text-align: center;
   color: white;
-  cursor:url(./plane.png), auto;
+  cursor:url(./cursor.png), auto;
   text-transform: uppercase;
 }
+
+
+/* body {
+  background-image: url(./sig.gif);
+  opacity: 0.99;
+height: 100%;
+background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ } */
+
 
 header {
   height: var(--header-height);
@@ -71,7 +82,7 @@ section {
 
 .som {
   height: var(--som-height);
-  text-align: left;
+  text-align: center;
   padding: 0.5em;
   color: var(--footer-bg-color);
 }
@@ -120,11 +131,12 @@ footer {
   text-transform: none;
   padding: 0.5em;
   font-size: 14px;
+  font-style: oblique;
 
 }
 
 .control {
-  cursor: pointer;
+  /* cursor: pointer; */
   margin: 10px;
   padding: 5px;
 }
@@ -226,6 +238,7 @@ footer {
   padding-top: 1.3em;
 }
 
+
 /* 
  ! FORM STYLING ///////////////////////////////////////////
 */
@@ -290,7 +303,7 @@ label:focus + input::placeholder {
 input[type="checkbox"] {
   height: 1.3em;
   width:  1.3em;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 /* 
@@ -330,6 +343,36 @@ button.clear:hover {
   color: black;
 }
 
+#resetAll {
+  float: right;
+  width: 6.8em;
+  padding: 0.6em;
+  font-size: 0.8em;
+  background-color: var(--footer-bg-color);
+  border: var(--errorColor);
+  color: white;
+}
+
+#generate {
+  position: inherit;
+  display: inline;
+  width: 10em;
+  background-color: var(--footer-bg-color);
+  border: 2px solid green;
+  color: white;
+  visibility: hidden;
+}
+
+#resetAll:hover {
+  background-color: red;
+}
+
+#generate:hover {
+  background-color: green;
+
+}
+
+
 ::placeholder {
   color: var(--placeholder-color);
   font-weight: normal;
@@ -361,21 +404,14 @@ button.clear:hover {
   height: 2em;
 }
 
-.fas {
+.fas .far {
   padding: 0 0.2em;
   color: inherit;
 }
 
-
-
-
-
-
-
-
-
-
-
+.success {
+  background-color: green;
+}
 
 
 /*
@@ -404,4 +440,17 @@ button.clear:hover {
     border-right: 5px solid green;
   }
 
+  /* #resetAll {
+    display: block;
+    width: 100%;
+  }
+  
+  #generate {
+    display: block;
+    width: 100%;
+  } */
+
+  .recap {
+    display: none;
+  }
 }

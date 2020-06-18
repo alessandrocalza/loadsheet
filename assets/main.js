@@ -8,6 +8,7 @@ import * as pax from "./paxFunctions.js";
 var ls = {};
 // Continuosly check tablinks status
 setInterval(greenBorder, 500);
+setInterval(showGenerate,500);
 
 // ! "START FROM DOW" TOGGLE ********************************************************************OK
 
@@ -213,7 +214,7 @@ checkBoxPax.addEventListener("click", function () {
     pax.nilPax();
     ls.paxStatusOk === false;
     recapPax();
-    clearForm("deadload");
+    // clearForm("deadload");
     console.log("nil pax selected");
     fn.hideError("pax");
   } else {
@@ -423,6 +424,7 @@ document.querySelector("#deadloadSubmit").addEventListener("click", function () 
 // * GREEN BORDER WHEN STATUS IS OK ***************************************************************OK
 
 function greenBorder() {
+
   // Dow check
   if (ls.dowStatusOk === true) {
     document.querySelector("#defaultOpen").classList.add("tablinkOk");
@@ -458,11 +460,11 @@ function greenBorder() {
   }
 }
 
-window.addEventListener("load", toggle);
-function toggle() {
-  let myBlink = document.querySelector("span#blink");
-  myBlink.style.visibility === "visible" ? (myBlink.style.visibility = "hidden") : (myBlink.style.visibility = "visible");
-}
+// window.addEventListener("load", toggle);
+// function toggle() {
+//   let myBlink = document.querySelector("span#blink");
+//   myBlink.style.visibility === "visible" ? (myBlink.style.visibility = "hidden") : (myBlink.style.visibility = "visible");
+// }
 
 // ! RECAP FUNCTIONS /////////////////////////////////////////////////////////////////////
 
@@ -530,3 +532,38 @@ function recapDeadload() {
     }
   } else deadloadInfo.innerHTML = "";
 }
+
+//* RESET ALL FORMS
+
+document.querySelector("#resetAll").addEventListener("click", function() {
+  clearForm("deadload");
+  clearForm("max");
+  clearForm("fuel");
+  clearForm("pax");
+  clearForm("dow");
+});
+
+
+// * SHOWS GENERATE BUTTON WHEN ALL TABS ARE OK
+function showGenerate(){
+  var generateBtn = document.querySelector("#generate");
+  if(
+    ls.dowStatusOk === true &&
+    ls.paxStatusOk === true &&
+    ls.fuelStatusOk === true &&
+    ls.maxStatusOk === true &&
+    ls.deadloadStatusOk === true
+  ) {
+    generateBtn.style.visibility = "visible";
+  }
+  else {
+    generateBtn.style.visibility = "hidden";
+  }
+}
+
+
+//* GENERATE BUTTON BEHAVIOUR
+
+document.querySelector("#generate").addEventListener("click", function() {
+  alert("ciao");
+});

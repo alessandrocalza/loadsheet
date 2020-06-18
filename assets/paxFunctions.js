@@ -26,7 +26,7 @@ export function nilPax() {
         var togInputs = document.querySelectorAll("input[type='text'].togPax");
         for (let i of togInputs) {
                 i.disabled = true;
-                i.style.backgroundColor = "grey";
+                // i.style.backgroundColor = "grey";
         }
 }
 
@@ -39,7 +39,7 @@ export function yesPax() {
         var togInputs = document.querySelectorAll("input[type='text'].togPax");
         for (let i of togInputs) {
                 i.disabled = false;
-                i.style.backgroundColor = "white";
+                // i.style.backgroundColor = "white";
         }
         // SETS LEFT HAND SIDE LIST BACK TO WHITE
         var fadeList = document.querySelectorAll(".fadePax");
@@ -52,3 +52,11 @@ export function yesPax() {
                 i.style.visibility = "visible";
         }
 }
+
+// export function passen() {
+//         const pax = {
+//                 adult : 10,
+//                 child : 5
+//         }
+//         return pax;
+// }

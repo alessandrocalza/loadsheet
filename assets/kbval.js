@@ -61,4 +61,4 @@ function keysPressed(e){
 
 // * DISABLES RIGHT CLICK
 
-// document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('contextmenu', event => event.preventDefault());
