@@ -481,8 +481,7 @@ function recapPax() {
 
   if (ls.paxStatusOk === true) {
     if (checkBoxPax.checked === true) {
-      paxInfo.innerHTML = `PAX NIL <br>
-                            BAGS NIL`;
+      paxInfo.innerHTML = `NIL PAX/BAGS`;
     } else {
       paxInfo.innerHTML = "";
 
@@ -503,9 +502,9 @@ function recapPax() {
 function recapFuel() {
   var fuelInfo = document.querySelector("#fuelInfo");
   if (ls.fuelStatusOk === true) {
-    fuelInfo.innerHTML = `Block: ${ls.block} <br>
-                          Trip: ${ls.trip} <br>
-                          Taxi: ${ls.taxi} <br>`;
+    fuelInfo.innerHTML = `BLOCK: ${ls.block} <br>
+                          TRIP: ${ls.trip} <br>
+                          TAXI: ${ls.taxi} <br>`;
   } else fuelInfo.innerHTML = "";
 }
 
@@ -522,12 +521,13 @@ function recapDeadload() {
   var deadloadInfo = document.querySelector("#deadloadInfo");
   if (ls.deadloadStatusOk === true) {
     if (ls.total === 0) {
-      deadloadInfo.innerHTML = "Nil Cargo";
+      deadloadInfo.innerHTML = "NIL CARGO";
     } else {
       deadloadInfo.innerHTML = `Bags: ${ls.bagsTotal} kg<br>
                                 Mail: ${ls.mailTotal} kg<br>
                                 Cargo: ${ls.cargoTotal} kg<br>
                                 Tare: ${ls.tareTotal} kg<br>
+                                <br>
                                 TOTAL: ${ls.total} kg`;
     }
   } else deadloadInfo.innerHTML = "";
@@ -565,5 +565,5 @@ function showGenerate(){
 //* GENERATE BUTTON BEHAVIOUR
 
 document.querySelector("#generate").addEventListener("click", function() {
-  alert("ciao");
+  alert("work in progress");
 });

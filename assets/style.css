@@ -357,19 +357,14 @@ button.clear:hover {
   position: inherit;
   display: inline;
   width: 10em;
-  background-color: var(--footer-bg-color);
   border: 2px solid green;
+  background-color: green;
   color: white;
   visibility: hidden;
 }
 
 #resetAll:hover {
   background-color: red;
-}
-
-#generate:hover {
-  background-color: green;
-
 }
 
 
