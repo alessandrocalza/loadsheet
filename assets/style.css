@@ -43,7 +43,7 @@
   font-family: Raleway;
   text-align: center;
   color: white;
-  cursor:url(./cursor.png), auto;
+  /* cursor:url(./cursor.png), auto; */
   text-transform: uppercase;
 }
 
@@ -51,8 +51,8 @@
 body {
   background-image: url(./base.png);
   opacity: 0.99;
-height: 100%;
-background-position: center;
+  height: 100%;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
  }
@@ -147,7 +147,7 @@ footer {
   float: left;
   border: none;
   outline: none;
-  /* cursor: pointer; */
+  cursor: pointer;
   padding: 10px 10px;
   font-size: 18px;
   width: 20%;
@@ -303,7 +303,7 @@ label:focus + input::placeholder {
 input[type="checkbox"] {
   height: 1.3em;
   width:  1.3em;
-  /* cursor: pointer; */
+  cursor: pointer;
 }
 
 /* 
@@ -324,7 +324,7 @@ button.submit {
   outline: none;
   line-height: 1;
   text-align: center;
-  /* cursor: pointer; */
+  cursor: pointer;
   transition-duration: 0.1s;
 }
 
