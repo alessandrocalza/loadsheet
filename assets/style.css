@@ -48,14 +48,14 @@
 }
 
 
-/* body {
-  background-image: url(./sig.gif);
+body {
+  background-image: url(./base.png);
   opacity: 0.99;
 height: 100%;
 background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
- } */
+ }
 
 
 header {
